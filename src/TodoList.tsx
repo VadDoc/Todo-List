@@ -16,7 +16,10 @@ const Todolist = (props: TodolistPropsType) => {
   const [error, setError] = useState<boolean>(false)
 
   const tasksList = props.tasks.map(t => {
-    const changeStatus = (event: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(t.id, event.currentTarget.checked)
+    const changeStatus = (event: ChangeEvent<HTMLInputElement>) => {
+      props.changeTaskStatus(t.id, event.currentTarget.checked)
+    }
+
     return (
       <li>
         <input

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import Todolist from "./TodoList";
 import {v1} from 'uuid';
+import {isBoolean} from "util";
 
 export type TaskType = {
   id: string
@@ -37,10 +38,21 @@ function App() {
   }
 
   const changeTaskStatus = (taskID: string, isDone: boolean) => {
-    const updatedTasks: Array<TaskType> = tasks.map(t => t.id === taskID ? {...t, isDone} : t)
-    setTasks(updatedTasks)
-    // setTasks(tasks.map(t => t.id === taskID ? {...t, isDone: !t.isDone} : t) )
+    let task = tasks.find(t => t.id === taskID)
+    if(task) task.isDone = isDone
+    // let copy = [...tasks]
+    // setTasks(copy)
+    setTasks([...tasks])
   }
+
+  // const changeTaskStatus = (taskID: string, isDone: boolean) => {
+  //   const updatedTasks: Array<TaskType> = tasks.map(t => t.id === taskID ? {...t, isDone} : t)
+  //   setTasks(updatedTasks)
+  // }
+
+  // const changeTaskStatus = (taskID: string, isDone: boolean) => {
+  //   setTasks(tasks.map(t => t.id === taskID ? {...t, isDone: !t.isDone} : t) )
+  // }
 
   const changeTodoFilter = (filter: FilterValueType) => {
     setFilter(filter)
