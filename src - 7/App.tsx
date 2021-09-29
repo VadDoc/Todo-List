@@ -3,6 +3,7 @@ import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./AddItemForm";
+import {MaterialUIElements} from "./components/MaterialUIElements";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistsType = {
@@ -41,12 +42,14 @@ function App() {
 
   const addTodoList = (title: string) => {
     // setTodolists([...todolists, {id: v1(), title: title, filter: 'all'}])
-     let todolist: TodolistsType = {id: v1(), title: title, filter: 'all'}
-    setTodolists([todolist, ...todolists])
-    setTasks({
-      ...tasks,
-      [todolist.id]: []
-    })
+    //  let todolist: TodolistsType = {id: v1(), title: title, filter: 'all'}
+    // setTodolists([todolist, ...todolists])
+    // setTasks({...tasks, [todolist.id]: []
+    // })
+
+    let newListTodoID = v1()
+    setTodolists([...todolists, {id: newListTodoID, title: title, filter: 'all'}])
+    setTasks({...tasks,[newListTodoID]: []})
   }
 
   const removeTodolist = (todolistID: string) => {
@@ -110,8 +113,9 @@ function App() {
           )
         })}
       </div>
+      <MaterialUIElements/>
     </div>
-  );
+  )
 }
 
 export default App;

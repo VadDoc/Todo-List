@@ -87,7 +87,6 @@ body {
 }
 
 .App input[type="checkbox"]:checked:after {
-    appearance: none;
     position: absolute;
     top: -3px;
     left: 3px;

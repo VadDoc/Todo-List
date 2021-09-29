@@ -4,11 +4,6 @@ import {Button} from "./components/Button";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 
-//1. Если нужно в тупую компоненту передать 2 callBack
-//2. Зачем мы в Input в callBack передаем что-то сложное + todoListID,
-// она же тупая: передаем callBackInput
-//3. Наличие onKeyPressHandler в Input оставляет ее тупой компонентой?
-
 export type TaskType = {
   id: string
   title: string
@@ -62,6 +57,10 @@ export function Todolist({
     props.changeTodoListTitle(todolistID, title)
   }
 
+  const changeTaskTitle = (id: string, title: string) => {
+    props.changeTaskTitle(todolistID, id, title)
+  }
+
   return (
     <div>
       <h3>
@@ -80,15 +79,11 @@ export function Todolist({
               changeTaskStatus(todolistID, t.id, e.currentTarget.checked);
             }
 
-            const changeTaskTitle = (title: string) => {
-              props.changeTaskTitle(todolistID, t.id, title)
-            }
-
             return <li key={t.id} className={t.isDone ? "is-done" : ""}>
               <input type="checkbox"
                      onChange={onChangeHandler}
                      checked={t.isDone}/>
-              <EditableSpan title={t.title} callBack={changeTaskTitle}/>
+              <EditableSpan title={t.title} callBack={()=>changeTaskTitle(t.id, t.title)}/>
               <Button callBack={callBackHandlerForRemoveTask}>x</Button>
             </li>
           })

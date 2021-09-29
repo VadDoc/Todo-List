@@ -1,8 +1,7 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {FilterValuesType} from './App';
 import {Button} from "./components/Button";
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditableSpan";
+import {SingleInput} from "./components/SingleInput";
 
 //1. Если нужно в тупую компоненту передать 2 callBack
 //2. Зачем мы в Input в callBack передаем что-то сложное + todoListID,
@@ -25,8 +24,6 @@ type PropsType = {
   addTask: (todolistID: string, title: string) => void
   changeTaskStatus: (todolistID: string, taskId: string, isDone: boolean) => void
   filter: FilterValuesType
-  changeTaskTitle: (todolistID: string, taskId: string, title: string) => void
-  changeTodoListTitle: (todolistID: string, title: string) => void
 }
 
 export function Todolist({
@@ -38,12 +35,24 @@ export function Todolist({
                            changeTaskStatus,
                            ...props
                          }: PropsType) {
+  let [title, setTitle] = useState<string>("")
+  let [error, setError] = useState<ErrorType>(null)
+
   const changeFilterForButton = (filter: FilterValuesType) => {
     changeFilter(todolistID, filter)
   }
 
   const callBackHandlerForTodolistRemove = () => {
     removeTodolist(todolistID)
+  }
+
+  const callBackInput = () => {
+    if (title.trim() !== "") {
+      props.addTask(todolistID, title.trim());
+      setTitle("");
+    } else {
+      setError("Title is required");
+    }
   }
 
   const classNameButton = (filter: FilterValuesType) => {
@@ -54,22 +63,22 @@ export function Todolist({
     }
   }
 
-  const addTask = (title: string) => {
-    props.addTask(todolistID, title)
-  }
-
-  const changeTodoListTitle = (title: string) => {
-    props.changeTodoListTitle(todolistID, title)
-  }
-
   return (
     <div>
       <h3>
-        {/*{props.title}*/}
-        <EditableSpan title={props.title} callBack={changeTodoListTitle}/>
+        {props.title}
         <Button callBack={callBackHandlerForTodolistRemove}>x</Button>
       </h3>
-      <AddItemForm addItem={addTask} buttonName={"Add task"}/>
+      <div>
+        <SingleInput
+          callBack={callBackInput}
+          title={title}
+          setTitle={setTitle}
+          error={error}
+          setError={setError}
+        />
+        <Button callBack={callBackInput}>Add Task</Button>
+      </div>
       <ul>
         {
           tasks.map(t => {
@@ -80,15 +89,11 @@ export function Todolist({
               changeTaskStatus(todolistID, t.id, e.currentTarget.checked);
             }
 
-            const changeTaskTitle = (title: string) => {
-              props.changeTaskTitle(todolistID, t.id, title)
-            }
-
             return <li key={t.id} className={t.isDone ? "is-done" : ""}>
               <input type="checkbox"
                      onChange={onChangeHandler}
                      checked={t.isDone}/>
-              <EditableSpan title={t.title} callBack={changeTaskTitle}/>
+              <span>{t.title}</span>
               <Button callBack={callBackHandlerForRemoveTask}>x</Button>
             </li>
           })
@@ -110,4 +115,3 @@ export function Todolist({
     </div>
   )
 }
-
