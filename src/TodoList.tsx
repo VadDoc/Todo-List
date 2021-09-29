@@ -4,11 +4,6 @@ import {Button} from "./components/Button";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 
-//1. Если нужно в тупую компоненту передать 2 callBack
-//2. Зачем мы в Input в callBack передаем что-то сложное + todoListID,
-// она же тупая: передаем callBackInput
-//3. Наличие onKeyPressHandler в Input оставляет ее тупой компонентой?
-
 export type TaskType = {
   id: string
   title: string
