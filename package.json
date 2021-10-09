@@ -1,6 +1,6 @@
 {
   "name": "it-incubator-todolist-ts",
-  "homepage": "https://VadDoc.github.io/Counter",
+  "homepage": "https://VadDoc.github.io/Todo-List",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
