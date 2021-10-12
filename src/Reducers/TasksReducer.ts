@@ -1,5 +1,10 @@
-import {TasksType, TodolistsType} from "../App";
 import {v1} from "uuid";
+import {todolistID1, todolistID2} from "./TodoListsReducer";
+import {TaskType} from "../Todolist";
+
+export type TasksType = {
+  [key: string]: Array<TaskType>
+}
 
 const REMOVE_TASK = 'REMOVE_TASK'
 const ADD_TASK = 'ADD_TASK'
@@ -7,8 +12,24 @@ const CHANGE_STATUS = 'CHANGE_STATUS'
 const CHANGE_TASK_TITLE = 'CHANGE_TASK_TITLE'
 const ADD_EMPTY_ARRAY_INSTEAD_TASK = 'ADD_EMPTY_ARRAY_INSTEAD_TASK'
 
+const initialState: TasksType = {
+  [todolistID1]: [
+    {id: v1(), title: "HTML&CSS", isDone: true},
+    {id: v1(), title: "JS", isDone: true},
+    {id: v1(), title: "ReactJS", isDone: false},
+    {id: v1(), title: "Rest API", isDone: false},
+    {id: v1(), title: "GraphQL", isDone: false},
+  ],
+  [todolistID2]: [
+    {id: v1(), title: "Meat", isDone: true},
+    {id: v1(), title: "Sweets", isDone: true},
+    {id: v1(), title: "Sugar", isDone: false},
+    {id: v1(), title: "Juice", isDone: false},
+    {id: v1(), title: "Fruit", isDone: false},
+  ]
+}
 
-export const TasksReducer = (state: TasksType, action: ActionsType): TasksType => {
+export const TasksReducer = (state: TasksType = initialState, action: ActionsType): TasksType => {
   switch (action.type) {
     case REMOVE_TASK:
       return {
@@ -34,7 +55,7 @@ export const TasksReducer = (state: TasksType, action: ActionsType): TasksType =
     case ADD_EMPTY_ARRAY_INSTEAD_TASK:
       return {
         ...state,
-        [action.todolist.id]: []
+        [action.newTodolistID]: []
       }
     default:
       return state
@@ -75,8 +96,8 @@ export const changeTaskTitleAC = (todolistID: string, taskId: string, title: str
     type: CHANGE_TASK_TITLE, todolistID, taskId, title
   } as const
 }
-export const addEmptyArrayInsteadTaskAC = (todolist: TodolistsType) => {
+export const addEmptyArrayInsteadTaskAC = (newTodolistID: string) => {
   return {
-    type: ADD_EMPTY_ARRAY_INSTEAD_TASK, todolist
+    type: ADD_EMPTY_ARRAY_INSTEAD_TASK, newTodolistID
   } as const
 }

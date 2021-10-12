@@ -1,24 +1,23 @@
 import {FilterValuesType} from "../App";
 
-let initialState:FilterValuesType="all"
+const SET_FILTER = 'SET_FILTER'
+const initialState: FilterValuesType = "all"
 
-export const filterReducer = (state=initialState, action: tsarAction) => {
-    switch (action.type) {
-        case 'SET-FILTER': {
-            return action.value;
-        }
-        default:
-            return state
-    }
+export const filterReducer = (state: FilterValuesType = initialState, action: ActionsType): FilterValuesType => {
+  switch (action.type) {
+    case SET_FILTER:
+      return action.value;
+    default:
+      return state
+  }
 }
 
-export type tsarAction = setFilterACType
-
+export type ActionsType = setFilterACType
 export type setFilterACType = ReturnType<typeof setFilterAC>
 
 export const setFilterAC = (value: FilterValuesType) => {
-    return {
-        type: 'SET-FILTER',
-        value
-    } as const
+  return {
+    type: SET_FILTER,
+    value
+  } as const
 }

@@ -7,8 +7,8 @@ type InputPropsType = {
 }
 
 export const Input = ({callBack, todolistID}:InputPropsType) => {
-  const [title, setTitle] = useState("")
-  const [error, setError] = useState<string | null>(null)
+  let [title, setTitle] = useState("")
+  let [error, setError] = useState<string | null>(null)
 
   const addTask = () => {
     if (title.trim() !== "") {
@@ -18,9 +18,11 @@ export const Input = ({callBack, todolistID}:InputPropsType) => {
       setError("Title is required");
     }
   }
+
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value)
   }
+
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     setError(null);
     if (e.charCode === 13) {

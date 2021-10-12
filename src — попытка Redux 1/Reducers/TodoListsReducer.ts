@@ -1,9 +1,5 @@
+import {FilterValuesType, TodolistsType} from "../App";
 import {v1} from "uuid";
-import {FilterValuesType} from "./FilterReducer";
-
-export type TodolistsType = {
-  id: string, title: string, filter: FilterValuesType
-}
 
 const REMOVE_TODO_LIST = 'REMOVE_TODO_LIST'
 const CHANGE_TODO_LIST_TITLE = 'CHANGE_TODO_LIST_TITLE'

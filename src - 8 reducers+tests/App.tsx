@@ -4,18 +4,18 @@ import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./AddItemForm";
 import {
-  AddEmptyArrayInsteadTaskAC,
-  AddTaskAC,
-  ChangeStatusAC,
-  ChangeTaskTitleAC,
-  RemoveTaskAC,
+  addEmptyArrayInsteadTaskAC,
+  addTaskAC,
+  changeStatusAC,
+  changeTaskTitleAC,
+  removeTaskAC,
   TasksReducer
 } from "./Reducers/TasksReducer";
 import {
-  AddTodoListAC,
-  ChangeFilterAC,
-  ChangeTodoListTitleAC,
-  RemoveTodolistAC,
+  addTodoListAC,
+  changeFilterAC,
+  changeTodoListTitleAC,
+  removeTodolistAC,
   TodoListsReducer
 } from "./Reducers/TodoListsReducer";
 
@@ -55,37 +55,41 @@ function App() {
   });
 
   const addTodoList = (title: string) => {
-    const todolist: TodolistsType = {id: v1(), title: title, filter: 'all'}
-    dispatchTodolists(AddTodoListAC(todolist))
-    dispatchTasks(AddEmptyArrayInsteadTaskAC(todolist))
+    // const todolist: TodolistsType = {id: v1(), title: title, filter: 'all'}
+    // dispatchTodolists(addTodoListAC(todolist))
+    // dispatchTasks(addEmptyArrayInsteadTaskAC(todolist))
+
+    const newTodolistID = v1()
+    dispatchTodolists(addTodoListAC(newTodolistID, title))
+    dispatchTasks(addEmptyArrayInsteadTaskAC(newTodolistID))
   }
 
   const removeTodolist = (todolistID: string) => {
-    dispatchTodolists(RemoveTodolistAC(todolistID))
+    dispatchTodolists(removeTodolistAC(todolistID))
   }
 
   function changeTodoListTitle(todolistID: string, title: string) {
-    dispatchTodolists(ChangeTodoListTitleAC(todolistID, title))
+    dispatchTodolists(changeTodoListTitleAC(todolistID, title))
   }
 
   function removeTask(todolistID: string, id: string) {
-    dispatchTasks(RemoveTaskAC(todolistID, id))
+    dispatchTasks(removeTaskAC(todolistID, id))
   }
 
   function addTask(todolistID: string, title: string) {
-    dispatchTasks(AddTaskAC(todolistID, title))
+    dispatchTasks(addTaskAC(todolistID, title))
   }
 
   function changeStatus(todolistID: string, taskId: string, isDone: boolean) {
-    dispatchTasks(ChangeStatusAC(todolistID, taskId, isDone))
+    dispatchTasks(changeStatusAC(todolistID, taskId, isDone))
   }
 
   function changeFilter(todolistID: string, value: FilterValuesType) {
-    dispatchTodolists(ChangeFilterAC(todolistID, value))
+    dispatchTodolists(changeFilterAC(todolistID, value))
   }
 
   function changeTaskTitle(todolistID: string, taskId: string, title: string) {
-    dispatchTasks(ChangeTaskTitleAC(todolistID, taskId, title))
+    dispatchTasks(changeTaskTitleAC(todolistID, taskId, title))
   }
 
   return (
