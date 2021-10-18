@@ -1,16 +1,16 @@
 import React, {useState} from "react";
 import {SingleInput} from "./components/SingleInput";
 import {Button} from "./components/Button";
-import {ErrorType} from "./Todolist";
 
-type AddItemFormPropsType = {
+export type ErrorType = string | null
+type PropsType = {
   addItem: (title: string) => void
   buttonName: string
 }
 
-export const AddItemForm = ({addItem, buttonName}: AddItemFormPropsType) => {
-  let [title, setTitle] = useState<string>("")
-  let [error, setError] = useState<ErrorType>(null)
+export const AddItemForm = ({addItem, buttonName}: PropsType) => {
+  const [title, setTitle] = useState<string>("")
+  const [error, setError] = useState<ErrorType>(null)
 
   const callBackInput = () => {
     if (title.trim() !== "") {

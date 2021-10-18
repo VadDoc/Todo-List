@@ -1,10 +1,9 @@
-import React, {useReducer, useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./AddItemForm";
 import {
-  addEmptyArrayInsteadTaskAC,
   addTaskAC,
   changeStatusAC,
   changeTaskTitleAC,
@@ -55,17 +54,17 @@ function App() {
   });
 
   const addTodoList = (title: string) => {
-    // const todolist: TodolistsType = {id: v1(), title: title, filter: 'all'}
-    // dispatchTodolists(addTodoListAC(todolist))
-    // dispatchTasks(addEmptyArrayInsteadTaskAC(todolist))
-
-    const newTodolistID = v1()
-    dispatchTodolists(addTodoListAC(newTodolistID, title))
-    dispatchTasks(addEmptyArrayInsteadTaskAC(newTodolistID))
+    // const newTodolistID = v1()
+    // dispatchTodolists(addTodoListAC(newTodolistID, title))
+    // dispatchTasks(addEmptyArrayInsteadTaskAC(newTodolistID))
+    const action = addTodoListAC(title)
+    dispatchTodolists(action)
+    dispatchTasks(action)
   }
 
   const removeTodolist = (todolistID: string) => {
     dispatchTodolists(removeTodolistAC(todolistID))
+    dispatchTasks(removeTodolistAC(todolistID))
   }
 
   function changeTodoListTitle(todolistID: string, title: string) {

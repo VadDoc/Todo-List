@@ -1,11 +1,12 @@
 import {
-  addEmptyArrayInsteadTaskAC,
   addTaskAC,
   changeStatusAC,
   changeTaskTitleAC,
   removeTaskAC,
   TasksReducer
 } from "./TasksReducer";
+import {TasksType} from "../App";
+import {addTodoListAC, removeTodolistAC} from "./TodoListsReducer";
 
 test('Remove task', () => {
   const startState = {
@@ -64,7 +65,7 @@ test('Change task status', () => {
   expect(endState.todolistID1[0].isDone).toBeFalsy()
   expect(endState.todolistID1[1].isDone).toBeTruthy()
   expect(endState.todolistID2[0].isDone).toBeFalsy()
-  expect(endState.todolistID2[0].isDone).toBeFalsy()
+  expect(endState.todolistID2[1].isDone).toBeFalsy()
 })
 
 test('Change task title', () => {
@@ -87,10 +88,54 @@ test('Change task title', () => {
   expect(endState.todolistID2[1].title).toBe("CSS")
 })
 
-test('Add empty array instead task', () => {
-  const startState = {}
-  const newTodolistID = '1'
-  const endState = TasksReducer(startState, addEmptyArrayInsteadTaskAC(newTodolistID))
+test('new array should be added when new todolist is added', () => {
+  const startState: TasksType = {
+    "todolistId1": [
+      { id: "1", title: "CSS", isDone: false },
+      { id: "2", title: "JS", isDone: true },
+      { id: "3", title: "React", isDone: false }
+    ],
+    "todolistId2": [
+      { id: "1", title: "bread", isDone: false },
+      { id: "2", title: "milk", isDone: true },
+      { id: "3", title: "tea", isDone: false }
+    ]
+  };
 
-  expect(endState['1'].length).toBe(0)
-})
+  const action = addTodoListAC("new todolist");
+
+  const endState = TasksReducer(startState, action)
+
+
+  const keys = Object.keys(endState);
+  const newKey = keys.find(k => k !== "todolistId1" && k !== "todolistId2");
+  if (!newKey) {
+    throw Error("new key should be added")
+  }
+
+  expect(keys.length).toBe(3);
+  expect(endState[newKey]).toEqual([]);
+});
+
+test('property with todolistId should be deleted', () => {
+  const startState: TasksType = {
+    "todolistId1": [
+      { id: "1", title: "CSS", isDone: false },
+      { id: "2", title: "JS", isDone: true },
+      { id: "3", title: "React", isDone: false }
+    ],
+    "todolistId2": [
+      { id: "1", title: "bread", isDone: false },
+      { id: "2", title: "milk", isDone: true },
+      { id: "3", title: "tea", isDone: false }
+    ]
+  };
+
+  const action = removeTodolistAC("todolistId2");
+  const endState = TasksReducer(startState, action)
+  const keys = Object.keys(endState);
+
+  expect(keys.length).toBe(1);
+  expect(endState["todolistId2"]).toBeUndefined();
+});
+

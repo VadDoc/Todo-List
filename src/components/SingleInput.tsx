@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
-import {ErrorType} from "../Todolist";
+import {ErrorType} from "../AddItemForm";
 
-type InputPropsType = {
+type PropsType = {
   title: string
   setTitle: (title: string) => void
   callBack: () => void
@@ -9,10 +9,11 @@ type InputPropsType = {
   setError: (error: ErrorType) => void
 }
 
-export const SingleInput = ({title, setTitle, callBack, error, setError}:InputPropsType) => {
+export const SingleInput = ({title, setTitle, callBack, error, setError}: PropsType) => {
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value)
   }
+
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     setError(null);
     if (e.charCode === 13) {

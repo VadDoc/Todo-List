@@ -1,11 +1,11 @@
 import React, {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
 
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-type propsType = DefaultButtonPropsType & {
+type PropsType = DefaultButtonPropsType & {
     callBack: () => void
 }
 
-export const Button=({callBack, ...props}:propsType)=>{
+export const Button=({callBack, ...props}:PropsType)=>{
     const onClickHandler=()=>{
         callBack()
     }
