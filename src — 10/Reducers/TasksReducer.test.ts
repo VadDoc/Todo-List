@@ -5,32 +5,35 @@ import {
   removeTaskAC,
   TasksReducer
 } from "./TasksReducer";
-import {TasksType} from "../App";
+import {TasksType, TodolistsType} from "../App";
 import {addTodoListAC, removeTodolistAC} from "./TodoListsReducer";
 
-// beforeEach(()=> {
-//   startState = {
-//     todolistID1: [
-//       {id: '1', title: "JS", isDone: false},
-//       {id: '2', title: "ReactJS", isDone: false},
-//     ],
-//     todolistID2: [
-//       {id: '1', title: "HTML", isDone: false},
-//       {id: '2', title: "CSS", isDone: false},
-//     ]
-//   }
-// })
-test('Remove task', () => {
-  const startState = {
+let startState: TasksType
+
+beforeEach(()=> {
+  startState = {
     todolistID1: [
-      {id: '1', title: "JS", isDone: true},
+      {id: '1', title: "JS", isDone: false},
       {id: '2', title: "ReactJS", isDone: false},
     ],
     todolistID2: [
-      {id: '1', title: "HTML", isDone: true},
+      {id: '1', title: "HTML", isDone: false},
       {id: '2', title: "CSS", isDone: false},
     ]
   }
+})
+
+test('Remove task', () => {
+  // const startState = {
+  //   todolistID1: [
+  //     {id: '1', title: "JS", isDone: true},
+  //     {id: '2', title: "ReactJS", isDone: false},
+  //   ],
+  //   todolistID2: [
+  //     {id: '1', title: "HTML", isDone: true},
+  //     {id: '2', title: "CSS", isDone: false},
+  //   ]
+  // }
   const endState = TasksReducer(startState, removeTaskAC('todolistID1', '1'))
 
   expect(endState.todolistID1.length).toBe(1)
@@ -39,16 +42,16 @@ test('Remove task', () => {
 })
 
 test('Add task', () => {
-  const startState = {
-    todolistID1: [
-      {id: '1', title: "JS", isDone: true},
-      {id: '2', title: "ReactJS", isDone: false},
-    ],
-    todolistID2: [
-      {id: '1', title: "HTML", isDone: true},
-      {id: '2', title: "CSS", isDone: false},
-    ]
-  }
+  // const startState = {
+  //   todolistID1: [
+  //     {id: '1', title: "JS", isDone: true},
+  //     {id: '2', title: "ReactJS", isDone: false},
+  //   ],
+  //   todolistID2: [
+  //     {id: '1', title: "HTML", isDone: true},
+  //     {id: '2', title: "CSS", isDone: false},
+  //   ]
+  // }
 
   const newTaskTitle = 'Angular'
   const endState = TasksReducer(startState, addTaskAC('todolistID1', newTaskTitle))
@@ -61,16 +64,16 @@ test('Add task', () => {
 })
 
 test('Change task status', () => {
-  const startState = {
-    todolistID1: [
-      {id: '1', title: "JS", isDone: false},
-      {id: '2', title: "ReactJS", isDone: false},
-    ],
-    todolistID2: [
-      {id: '1', title: "HTML", isDone: false},
-      {id: '2', title: "CSS", isDone: false},
-    ]
-  }
+  // const startState = {
+  //   todolistID1: [
+  //     {id: '1', title: "JS", isDone: false},
+  //     {id: '2', title: "ReactJS", isDone: false},
+  //   ],
+  //   todolistID2: [
+  //     {id: '1', title: "HTML", isDone: false},
+  //     {id: '2', title: "CSS", isDone: false},
+  //   ]
+  // }
 
   const endState = TasksReducer(startState, changeStatusAC('todolistID1', '2', true))
 
@@ -81,16 +84,16 @@ test('Change task status', () => {
 })
 
 test('Change task title', () => {
-  const startState = {
-    todolistID1: [
-      {id: '1', title: "JS", isDone: false},
-      {id: '2', title: "ReactJS", isDone: false},
-    ],
-    todolistID2: [
-      {id: '1', title: "HTML", isDone: false},
-      {id: '2', title: "CSS", isDone: false},
-    ]
-  }
+  // const startState = {
+  //   todolistID1: [
+  //     {id: '1', title: "JS", isDone: false},
+  //     {id: '2', title: "ReactJS", isDone: false},
+  //   ],
+  //   todolistID2: [
+  //     {id: '1', title: "HTML", isDone: false},
+  //     {id: '2', title: "CSS", isDone: false},
+  //   ]
+  // }
 
   const endState = TasksReducer(startState, changeTaskTitleAC('todolistID1', '1', 'Angular'))
 

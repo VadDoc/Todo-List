@@ -4,25 +4,18 @@ export type TodolistsType = {
   id: string, title: string, filter: FilterValuesType
 }
 export type FilterValuesType = "all" | "active" | "completed";
-// export type FilterValuesType = typeof filterValues
-//
-// export const filterValues = {
-//   all: "all",
-//   active: "active",
-//   completed: "completed",
-// }
 
 export const REMOVE_TODO_LIST = 'REMOVE_TODO_LIST'
 export const ADD_TODO_LIST = 'ADD_TODO_LIST'
 const CHANGE_TODO_LIST_TITLE = 'CHANGE_TODO_LIST_TITLE'
 const CHANGE_FILTER = 'CHANGE_FILTER'
 
-// export const todolistID1 = v1();
-// export const todolistID2 = v1();
+export const todolistID1 = v1();
+export const todolistID2 = v1();
 
 const initialState: Array<TodolistsType> = [
-  // {id: todolistID1, title: 'What to learn', filter: 'all'},
-  // {id: todolistID2, title: 'What to buy', filter: 'all'},
+  {id: todolistID1, title: 'What to learn', filter: 'all'},
+  {id: todolistID2, title: 'What to buy', filter: 'all'},
 ]
 
 export const TodoListsReducer = (state: Array<TodolistsType> = initialState, action: ActionsType): Array<TodolistsType> => {

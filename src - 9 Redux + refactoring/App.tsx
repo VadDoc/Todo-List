@@ -1,7 +1,7 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import './App.css';
-import {Todolist} from './components/Todolist';
-import {AddItemForm} from "./components/AddItemForm/AddItemForm";
+import {Todolist} from './Todolist';
+import {AddItemForm} from "./AddItemForm";
 import {addTodolistAC, TodolistsType,} from "./Reducers/TodoListsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootReducerType} from "./Store/Store";
@@ -9,13 +9,10 @@ import {RootReducerType} from "./Store/Store";
 function App() {
   const todolists = useSelector<RootReducerType, Array<TodolistsType>>(state => state.todolists)
   const dispatch = useDispatch()
-  const addTodolist = useCallback((title: string) => {
+  const addTodolist = (title: string) => {
     const action = addTodolistAC(title)
     dispatch(action)
-  }, [dispatch])
-
-  console.log('add App')
-
+  }
 
   return (
     <div className="App">
