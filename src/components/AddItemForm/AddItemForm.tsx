@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {SingleInput} from "../Commons/SingleInput";
 import {Button} from "../Commons/Button";
 
@@ -13,14 +13,14 @@ export const AddItemForm = React.memo(({addItem, buttonName}: PropsType) => {
   const [title, setTitle] = useState<string>("")
   const [error, setError] = useState<ErrorType>(null)
 
-  const callBackInput = () => {
+  const callBackInput = useCallback(() => {
     if (title.trim() !== "") {
       addItem(title.trim());
       setTitle("");
     } else {
       setError("Title is required");
     }
-  }
+  },[title, addItem])
 
   return (
     <div>

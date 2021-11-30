@@ -9,12 +9,12 @@ type PropsType = {
   setError: (error: ErrorType) => void
 }
 
-export const SingleInput = ({title, setTitle, callBack, error, setError}: PropsType) => {
+export const SingleInput = React.memo(({title, setTitle, callBack, error, setError}: PropsType) => {
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value)
   }
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    setError(null);
+   if (error !== null) setError(null)
     if (e.charCode === 13) {
       callBack();
     }
@@ -31,4 +31,4 @@ export const SingleInput = ({title, setTitle, callBack, error, setError}: PropsT
       {error && <div className="error-message">{error}</div>}
     </div>
   )
-}
+})

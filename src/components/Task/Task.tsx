@@ -23,7 +23,7 @@ export const Task = React.memo(({todolistId, task}: PropsType) => {
   }
 
   return (
-    <li key={task.id} className={task.isDone ? "is-done" : ""}>
+    <li className={task.isDone ? "is-done" : ""}>
       <input type="checkbox" onChange={onChangeInputHandler} checked={task.isDone}/>
       <EditableSpan title={task.title} callBack={changeTaskTitle}/>
       <Button callBack={removeTask}>x</Button>

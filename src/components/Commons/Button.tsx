@@ -5,11 +5,11 @@ type PropsType = DefaultButtonPropsType & {
   callBack: () => void
 }
 
-export const Button = ({callBack, ...props}: PropsType) => {
+export const Button = React.memo(({callBack, ...props}: PropsType) => {
   const onClickHandler = () => {
     callBack()
   }
   return (
     <button onClick={onClickHandler} {...props} />
   )
-}
+})
