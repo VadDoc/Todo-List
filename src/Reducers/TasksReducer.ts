@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {
   ADD_TODO_LIST, REMOVE_TODO_LIST,
-  // todolistID1, todolistID2,
+  todolistID1, todolistID2, todolistID3, todolistID4,
   AddTodolistActionType, RemoveTodolistActionType
 } from "./TodoListsReducer";
 
@@ -20,20 +20,35 @@ const CHANGE_TASK_STATUS = 'CHANGE_TASK_STATUS'
 const CHANGE_TASK_TITLE = 'CHANGE_TASK_TITLE'
 
 const initialState: TasksType = {
-  // [todolistID1]: [
-  //   {id: v1(), title: "HTML&CSS", isDone: true},
-  //   {id: v1(), title: "JS", isDone: true},
-  //   {id: v1(), title: "ReactJS", isDone: false},
-  //   {id: v1(), title: "Rest API", isDone: false},
-  //   {id: v1(), title: "GraphQL", isDone: false},
-  // ],
-  // [todolistID2]: [
-  //   {id: v1(), title: "Meat", isDone: true},
-  //   {id: v1(), title: "Sweets", isDone: true},
-  //   {id: v1(), title: "Sugar", isDone: false},
-  //   {id: v1(), title: "Juice", isDone: false},
-  //   {id: v1(), title: "Fruit", isDone: false},
-  // ]
+  [todolistID1]: [
+    {id: v1(), title: "HTML&CSS", isDone: true},
+    {id: v1(), title: "JS", isDone: true},
+    {id: v1(), title: "ReactJS", isDone: false},
+    {id: v1(), title: "Rest API", isDone: false},
+    {id: v1(), title: "GraphQL", isDone: false},
+  ],
+  [todolistID2]: [
+    {id: v1(), title: "Meat", isDone: true},
+    {id: v1(), title: "Sweets", isDone: true},
+    {id: v1(), title: "Sugar", isDone: false},
+    {id: v1(), title: "Juice", isDone: false},
+    {id: v1(), title: "Fruit", isDone: false},
+  ],
+  [todolistID3]: [
+    {id: v1(), title: "Twin Peaks", isDone: true},
+    {id: v1(), title: "Black Mirror", isDone: true},
+    {id: v1(), title: "Breaking Bad", isDone: false},
+    {id: v1(), title: "The Crown", isDone: false},
+    {id: v1(), title: "Game of Thrones", isDone: false},
+    {id: v1(), title: "The Office", isDone: false},
+  ],
+  [todolistID4]: [
+    {id: v1(), title: "Ann", isDone: true},
+    {id: v1(), title: "Jane", isDone: true},
+    {id: v1(), title: "Nick", isDone: false},
+    {id: v1(), title: "Kate", isDone: false},
+    {id: v1(), title: "Jhon", isDone: false},
+  ]
 }
 
 export const TasksReducer = (state: TasksType = initialState, action: ActionsType): TasksType => {
