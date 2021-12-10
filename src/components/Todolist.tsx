@@ -13,7 +13,6 @@ import {Task} from "./Task/Task";
 type PropsType = { todolist: TodolistsType }
 
 export const Todolist = React.memo(({todolist}: PropsType) => {
-  console.log('add Todolist')
   const tasks = useSelector<RootReducerType, Array<TaskType>>(state => state.tasks[todolist.id])
   const dispatch = useDispatch()
 

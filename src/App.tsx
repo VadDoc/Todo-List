@@ -14,9 +14,6 @@ function App() {
     dispatch(action)
   }, [dispatch])
 
-  console.log('add App')
-
-
   return (
     <div className="App">
       <AddItemForm addItem={addTodolist} buttonName={'Add todolist'}/>
